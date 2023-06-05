@@ -1,0 +1,20 @@
+@startuml
+
+left to right direction
+
+actor "Разработчик модели" as dev
+actor "Клиент банка" as user
+
+rectangle "Модель для прогнозирования вероятности возврата кредита" {
+  usecase "Загрузка набора данных с кредитами для обучения" as use_case_1
+  usecase "Установка параметров модели" as use_case_2
+  usecase "Загрузка набора данных с кредитами для проверки модели" as use_case_3
+  usecase "Запрос на одобрение кредита" as use_case_4
+}
+
+dev --> use_case_1
+dev --> use_case_2
+dev --> use_case_3
+user --> use_case_4
+
+@enduml

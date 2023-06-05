@@ -1,0 +1,20 @@
+@startuml
+
+node Клиент as client {
+  [Browser]
+}
+
+node Сервер as server {
+  [Nginx]
+  [Gunicorn]
+  [FastAPI]
+  [Classifier]
+}
+
+[Browser] --> HTTPS
+HTTPS - [Nginx]
+[Nginx] ..> [Gunicorn]
+[Gunicorn] ..> [FastAPI]
+[FastAPI] ..> [Classifier]
+
+@enduml

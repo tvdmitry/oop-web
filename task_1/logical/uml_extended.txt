@@ -1,0 +1,66 @@
+@startuml
+
+hide class circle
+
+class "Данные о клиенте" as Sample {
+    "Стаж работы (лет)": int
+    "Тип домовладения": int
+    "Срок кредита (месяцев)": int
+    "Возраст (лет)": int
+    "Семейное положение": int
+    "Есть ли предыдущие кредиты": bool
+    "Тип работы": int
+    "Расходы (в месяц)": float
+    "Доходы (в месяц)": float
+    "Стоимость всех активов": float
+    "Сумма задолженностей": float
+    "Сумма кредита": float
+    "Цена товара, который берется в кредит": float
+}
+
+class "Данные о новом клиенте" as UnknownSample {
+}
+
+class "Данные о старом клиенте" as KnownSample {
+    "Выплачен ли кредит": bool
+}
+
+class "Тестовые данные о клиенте" as TestSample {
+    "Предсказание о выплате кредита": bool | None
+}
+
+class "Обучающие данные о клиенте" as TrainSample {
+}
+
+class "Предсказанные данные о клиенте" as ClassifiedSample {
+    "Предсказание о выплате кредита": bool
+}
+
+class Hyperparameter {
+    k: int
+    quality: float
+}
+
+class "Набор данных" as DataSet {
+    "Название": str
+    "Дата создания": datetime
+    "Дата тестирования": datetime
+}
+class "List[TrainSample]"
+class "List[TestSample]"
+class "List[Hyperparameter]"
+
+DataSet o--> "List[TrainSample]" : Тренировочный набор
+DataSet o--> "List[TestSample]" : Тестовый набор
+DataSet o--> "List[Hyperparameter]"
+
+"List[TrainSample]" o--> TrainSample
+"List[TestSample]" o--> TestSample
+"List[Hyperparameter]" *--> Hyperparameter
+
+Sample <|-- UnknownSample
+Sample <|-- KnownSample
+ClassifiedSample <|-- UnknownSample
+TestSample <|-- KnownSample
+TrainSample <|-- KnownSample
+@enduml

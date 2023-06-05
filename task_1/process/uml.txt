@@ -1,0 +1,21 @@
+@startuml
+
+hide empty description
+
+state "Провалидировать данные" as Validate
+state "Данные валидны?" as isValid <<choice>>
+state "Вернуть ответ с кодом ошибки" as Error
+state "Выполнить преобразование данных" as Preparing
+state "Использовать модель для предсказания" as Prediction
+state "Вернуть ответ с предсказанием" as Result
+
+[*] --> Validate
+Validate --> isValid
+isValid --> Error : "Данные не валидны"
+Error --> [*]
+isValid --> Preparing : "Данные валидны"
+Preparing --> Prediction
+Prediction --> Result
+Result --> [*]
+
+@enduml
